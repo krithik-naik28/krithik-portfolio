@@ -6,305 +6,374 @@
 <title>Krithik Sundar Naik — BCA Graduate | Banking Aspirant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy: #16233F;
-    --paper: #F3EEDF;
-    --paper-line: #D9CFB4;
-    --ink: #24437C;
-    --stamp: #A6342E;
-    --gold: #B8933C;
-    --text: #1C1C1C;
-    --text-soft: #4B4B46;
-    --white: #FFFDF8;
+    --bg: #F7F5EF;
+    --ink: #14201C;
+    --muted: #6B7570;
+    --primary: #0B4F45;
+    --primary-light: #1C8A73;
+    --accent: #E8A33D;
+    --line: #E3E0D5;
+    --card: #FFFFFF;
   }
-
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
   body{
     margin:0;
-    background: var(--paper);
-    background-image:
-      linear-gradient(var(--paper-line) 1px, transparent 1px);
-    background-size: 100% 2.1em;
-    background-position: 0 210px;
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
   }
-
   @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; transition: none !important; }
+    *{ animation:none !important; transition:none !important; }
   }
 
-  a{ color: var(--ink); }
-
-  .sheet{
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
+  #progress{
+    position:fixed; top:0; left:0; height:3px; width:0%;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    z-index:100; transition:width 0.1s linear;
   }
 
-  /* ---------- COVER / HEADER ---------- */
-  .cover{
-    background: var(--navy);
-    color: var(--white);
-    padding: 48px 32px 40px;
-    margin: 0 0 0;
-    border-bottom: 6px double var(--gold);
-    position: relative;
+  .wrap{ max-width:920px; margin:0 auto; padding:0 28px; }
+
+  .hero{
+    padding:90px 0 60px;
+    position:relative;
   }
-  .cover::before{
-    content: "";
-    position: absolute;
-    inset: 10px;
-    border: 1px solid rgba(184,147,60,0.45);
-    pointer-events: none;
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 0 22px;
+    opacity:0;
+    animation: rise 0.7s ease forwards;
   }
-  .passbook-label{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin: 0 0 18px;
+  .eyebrow .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--accent);
+    animation: pulse 2s ease-in-out infinite;
   }
-  .name{
-    font-family: 'Fraunces', serif;
-    font-weight: 700;
-    font-size: clamp(2rem, 7vw, 3.1rem);
-    margin: 0 0 6px;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
+  h1.name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:clamp(2.6rem,8vw,4.4rem);
+    margin:0 0 12px;
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    opacity:0;
+    animation: rise 0.8s ease 0.1s forwards;
+  }
+  h1.name .accent-word{
+    color:var(--primary);
+    position:relative;
+    display:inline-block;
+  }
+  h1.name .accent-word::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:6px;
+    height:0.28em; width:100%;
+    background:var(--accent);
+    opacity:0.35;
+    z-index:-1;
+    transform:scaleX(0);
+    transform-origin:left;
+    animation:sweep 0.9s ease 0.6s forwards;
   }
   .role{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.95rem;
-    letter-spacing: 0.06em;
-    color: #D9CFB4;
-    margin: 0 0 28px;
+    font-size:1.15rem;
+    color:var(--muted);
+    max-width:52ch;
+    margin:0 0 34px;
+    opacity:0;
+    animation: rise 0.8s ease 0.25s forwards;
   }
-  .contact-row{
-    display:flex;
-    flex-wrap: wrap;
-    gap: 10px 28px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    color: #E7E1CF;
-    border-top: 1px solid rgba(217,207,180,0.3);
-    padding-top: 18px;
+  .contact-pills{
+    display:flex; flex-wrap:wrap; gap:12px;
+    opacity:0;
+    animation: rise 0.8s ease 0.4s forwards;
   }
-  .contact-row span{ white-space: nowrap; }
-  .contact-row a{ color: #E7E1CF; text-decoration: none; border-bottom: 1px dotted rgba(231,225,207,0.6); }
-
-  /* ---------- SECTION ENTRIES ---------- */
-  .entry{
-    padding: 40px 0 8px;
-    border-bottom: 1px solid var(--paper-line);
+  .pill{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.8rem;
+    border:1px solid var(--line);
+    background:var(--card);
+    padding:9px 16px;
+    border-radius:999px;
+    text-decoration:none;
+    color:var(--ink);
+    transition: all 0.25s ease;
   }
-  .entry:last-of-type{ border-bottom: none; }
-
-  .entry-no{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.18em;
-    color: var(--stamp);
-    text-transform: uppercase;
-    margin: 0 0 10px;
-    display:flex;
-    align-items:center;
-    gap: 10px;
-  }
-  .entry-no::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background: var(--paper-line);
+  .pill:hover{
+    border-color:var(--primary);
+    color:var(--primary);
+    transform:translateY(-2px);
   }
 
-  .entry h2{
-    font-family: 'Fraunces', serif;
-    font-weight: 600;
-    font-size: 1.5rem;
-    margin: 0 0 14px;
-    color: var(--navy);
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  @keyframes sweep{ to{ transform:scaleX(1); } }
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.4; transform:scale(1.3); }
   }
 
-  .summary-text{
-    font-size: 1.02rem;
-    color: var(--text-soft);
-    max-width: 60ch;
-  }
-
-  /* ---------- SKILLS as ledger rows ---------- */
-  .ledger-rows{
-    list-style:none;
-    margin:0; padding:0;
-  }
-  .ledger-rows li{
-    display:flex;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 9px 0;
-    border-bottom: 1px dashed var(--paper-line);
-    font-size: 0.96rem;
-  }
-  .ledger-rows li:last-child{ border-bottom:none; }
-  .ledger-rows .tag{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--ink);
-    letter-spacing: 0.05em;
-    white-space: nowrap;
-  }
-
-  /* ---------- CERTIFICATE STAMPS ---------- */
-  .cert{
-    display:flex;
-    gap: 20px;
-    align-items:flex-start;
-    padding: 16px 0;
-  }
-  .cert + .cert{ border-top: 1px dashed var(--paper-line); }
-  .stamp{
-    flex: 0 0 auto;
-    width: 66px; height: 66px;
-    border-radius: 50%;
-    border: 2.5px solid var(--stamp);
-    color: var(--stamp);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-family:'Space Mono', monospace;
-    font-size: 0.55rem;
-    font-weight:700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    transform: rotate(-8deg);
-    line-height: 1.15;
-    opacity: 0.88;
-    padding: 4px;
-  }
-  .cert-body h3{
-    margin: 0 0 4px;
-    font-family:'Fraunces', serif;
-    font-size: 1.08rem;
-    color: var(--navy);
-  }
-  .cert-body p{
-    margin: 0;
-    font-size: 0.88rem;
-    color: var(--text-soft);
-    font-family: 'Space Mono', monospace;
-  }
-
-  /* ---------- EDUCATION as passbook transactions ---------- */
-  .txn{
+  .stats{
     display:grid;
-    grid-template-columns: 100px 1fr;
-    gap: 4px 18px;
-    padding: 14px 0;
-    border-bottom: 1px dashed var(--paper-line);
-    align-items: baseline;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    margin-top:8px;
   }
-  .txn:last-child{ border-bottom:none; }
-  .txn .date{
-    font-family:'Space Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--ink);
+  .stat{
+    background:var(--card);
+    padding:22px 18px;
+    text-align:center;
   }
-  .txn .desc h3{
-    margin: 0 0 3px;
-    font-size: 1rem;
-    font-family: 'Fraunces', serif;
-    font-weight:600;
-    color: var(--navy);
+  .stat .num{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:2rem;
+    color:var(--primary);
   }
-  .txn .desc p{
-    margin:0;
-    font-size: 0.86rem;
-    color: var(--text-soft);
+  .stat .label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.68rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-top:4px;
   }
 
-  /* ---------- PROJECT ---------- */
+  section{ padding:70px 0; border-top:1px solid var(--line); }
+  section:first-of-type{ border-top:none; }
+
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:36px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.85rem;
+    color:var(--accent);
+  }
+  .section-head h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:1.9rem;
+    margin:0;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  .about-text{
+    font-size:1.08rem;
+    color:var(--muted);
+    max-width:68ch;
+  }
+
+  .chips{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:10px 18px;
+    border-radius:999px;
+    font-size:0.92rem;
+    transition: all 0.25s ease;
+    cursor:default;
+  }
+  .chip:hover{
+    background:var(--primary);
+    color:#fff;
+    border-color:var(--primary);
+    transform:translateY(-3px);
+  }
+
+  .cert-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  @media (max-width:600px){ .cert-grid{ grid-template-columns:1fr; } }
+  .cert-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cert-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 30px -18px rgba(11,79,69,0.35);
+    border-color:var(--primary-light);
+  }
+  .cert-icon{
+    width:38px;height:38px;border-radius:10px;
+    background:rgba(11,79,69,0.08);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--primary);
+    margin-bottom:14px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+  }
+  .cert-card h3{
+    font-family:'Space Grotesk',sans-serif;
+    margin:0 0 6px;
+    font-size:1.08rem;
+  }
+  .cert-card p{
+    margin:0;
+    color:var(--muted);
+    font-size:0.88rem;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  .timeline{ position:relative; padding-left:34px; }
+  .timeline::before{
+    content:"";
+    position:absolute; left:5px; top:6px; bottom:6px; width:2px;
+    background:var(--line);
+  }
+  .timeline .growth-line{
+    position:absolute; left:5px; top:6px; width:2px;
+    background:var(--primary);
+    height:0%;
+    transition:height 1.4s ease;
+  }
+  .t-item{ position:relative; padding-bottom:34px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-dot{
+    position:absolute; left:-34px; top:4px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--card); border:2px solid var(--primary);
+  }
+  .t-item .t-date{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.76rem;
+    color:var(--primary);
+    margin-bottom:4px;
+  }
+  .t-item h3{
+    font-family:'Space Grotesk',sans-serif;
+    margin:0 0 4px;
+    font-size:1.05rem;
+  }
+  .t-item p{ margin:0; color:var(--muted); font-size:0.92rem; }
+
   .project-card{
-    border: 1px solid var(--paper-line);
-    background: var(--white);
-    padding: 22px 22px 18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .project-card::before{
+    content:"";
+    position:absolute; top:-40%; right:-15%;
+    width:280px; height:280px;
+    background:radial-gradient(circle, rgba(232,163,61,0.16), transparent 70%);
   }
   .project-card h3{
-    margin: 0 0 4px;
-    font-family:'Fraunces', serif;
-    color: var(--navy);
-    font-size: 1.2rem;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:1.4rem;
+    margin:0 0 6px;
   }
   .project-meta{
-    font-family: 'Space Mono', monospace;
-    font-size: 0.74rem;
-    color: var(--stamp);
-    margin: 0 0 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    color:var(--primary);
+    margin:0 0 16px;
   }
   .project-card ul{
-    margin: 12px 0 16px;
-    padding-left: 18px;
-    color: var(--text-soft);
-    font-size: 0.94rem;
+    margin:14px 0 20px;
+    padding-left:20px;
+    color:var(--muted);
   }
-  .stack{
-    display:flex;
-    flex-wrap:wrap;
-    gap: 8px;
-  }
+  .stack{ display:flex; flex-wrap:wrap; gap:8px; }
   .stack span{
-    font-family:'Space Mono', monospace;
-    font-size: 0.7rem;
-    border: 1px solid var(--ink);
-    color: var(--ink);
-    padding: 3px 9px;
-    letter-spacing: 0.03em;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    background:rgba(11,79,69,0.08);
+    color:var(--primary);
+    padding:5px 12px;
+    border-radius:999px;
   }
 
-  /* ---------- FOOTER ---------- */
+  .lang-row{ display:flex; gap:14px; flex-wrap:wrap; }
+  .lang-bar-wrap{
+    flex:1; min-width:180px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px 18px;
+  }
+  .lang-top{ display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:8px; }
+  .lang-track{ height:6px; background:var(--line); border-radius:4px; overflow:hidden; }
+  .lang-fill{ height:100%; background:linear-gradient(90deg,var(--primary),var(--primary-light)); width:0%; border-radius:4px; transition:width 1.2s ease; }
+
   footer{
     text-align:center;
-    padding: 40px 0 10px;
-    font-family:'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-soft);
-    letter-spacing: 0.04em;
-  }
-
-  @media (max-width: 480px){
-    .cover{ padding: 36px 20px 30px; }
-    .txn{ grid-template-columns: 1fr; }
-    .txn .date{ order:2; }
+    padding:50px 0 40px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.78rem;
+    color:var(--muted);
   }
 </style>
 </head>
 <body>
 
-<div class="cover">
-  <p class="passbook-label">Professional Passbook — Career Statement</p>
-  <h1 class="name">Krithik Sundar Naik</h1>
-  <p class="role">BCA GRADUATE — BANKING ASPIRANT</p>
-  <div class="contact-row">
-    <span>📍 Mumbai, India</span>
-    <span>📞 <a href="tel:+919967845645">+91 9967845645</a></span>
-    <span>✉️ <a href="mailto:krithiknaik2005@gmail.com">krithiknaik2005@gmail.com</a></span>
+<div id="progress"></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <p class="eyebrow"><span class="dot"></span>Available for banking roles — Mumbai</p>
+    <h1 class="name">Krithik Sundar <span class="accent-word">Naik</span></h1>
+    <p class="role">BCA Graduate building a career in banking — grounded in computer skills, data accuracy, and a fast-learning mindset.</p>
+    <div class="contact-pills">
+      <a class="pill" href="tel:+919967845645">📞 +91 9967845645</a>
+      <a class="pill" href="mailto:krithiknaik2005@gmail.com">✉️ krithiknaik2005@gmail.com</a>
+      <span class="pill">📍 Mumbai, India</span>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="num">2026</div>
+        <div class="label">BCA Graduate</div>
+      </div>
+      <div class="stat">
+        <div class="num">2</div>
+        <div class="label">Certificates</div>
+      </div>
+      <div class="stat">
+        <div class="num">3</div>
+        <div class="label">Languages</div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div class="sheet">
-
-  <section class="entry">
-    <p class="entry-no">Entry 01 — Summary</p>
-    <h2>About</h2>
-    <p class="summary-text">
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2>About</h2></div>
+    <p class="about-text reveal">
       I am a BCA graduate looking to build a stable and long-term career in the
       banking sector. I have a good understanding of computers and databases,
       including SQL, which helps me work accurately with data and systems.
@@ -314,110 +383,128 @@
     </p>
   </section>
 
-  <section class="entry">
-    <p class="entry-no">Entry 02 — Skills</p>
-    <h2>Declared Skills</h2>
-    <ul class="ledger-rows">
-      <li>MS Office <span class="tag">CERTIFIED</span></li>
-      <li>Data Entry &amp; Accuracy <span class="tag">CORE</span></li>
-      <li>Customer Handling <span class="tag">CORE</span></li>
-      <li>Fast Learner / Quick to Adapt <span class="tag">STRENGTH</span></li>
-      <li>Problem-Solving <span class="tag">CORE</span></li>
-      <li>Computer Literacy <span class="tag">CORE</span></li>
-      <li>Basic SQL &amp; Web Knowledge <span class="tag">HTML · CSS · JS · SQL</span></li>
-    </ul>
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2>Skills</h2></div>
+    <div class="chips reveal">
+      <span class="chip">MS Office (Certified)</span>
+      <span class="chip">Data Entry &amp; Accuracy</span>
+      <span class="chip">Customer Handling</span>
+      <span class="chip">Fast Learner</span>
+      <span class="chip">Problem-Solving</span>
+      <span class="chip">Computer Literacy</span>
+      <span class="chip">Basic SQL &amp; Web Knowledge</span>
+    </div>
   </section>
 
-  <section class="entry">
-    <p class="entry-no">Entry 03 — Certifications</p>
-    <h2>Verified Certificates</h2>
-
-    <div class="cert">
-      <div class="stamp">VERIFIED<br>2024</div>
-      <div class="cert-body">
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2>Certifications</h2></div>
+    <div class="cert-grid reveal">
+      <div class="cert-card">
+        <div class="cert-icon">CS</div>
         <h3>Cyber Security Training</h3>
-        <p>AcmeGrade × Mood Indigo, IIT Bombay — 12 Nov to 12 Dec 2024</p>
+        <p>AcmeGrade × Mood Indigo, IIT Bombay<br>12 Nov – 12 Dec 2024</p>
       </div>
-    </div>
-
-    <div class="cert">
-      <div class="stamp">VERIFIED<br>2023</div>
-      <div class="cert-body">
+      <div class="cert-card">
+        <div class="cert-icon">MS</div>
         <h3>HTML &amp; MS Office</h3>
-        <p>St. Mary's High School &amp; Junior College, Kalina — 2022–23</p>
+        <p>St. Mary's High School &amp; Junior College, Kalina<br>2022–23</p>
       </div>
     </div>
   </section>
 
-  <section class="entry">
-    <p class="entry-no">Entry 04 — Education</p>
-    <h2>Academic Record</h2>
-
-    <div class="txn">
-      <div class="date">2023–2026</div>
-      <div class="desc">
+  <section>
+    <div class="section-head"><span class="section-num">04</span><h2>Education</h2></div>
+    <div class="timeline reveal" id="timeline">
+      <div class="growth-line" id="growthLine"></div>
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-date">2023 — 2026</div>
         <h3>Bachelor of Computer Applications (BCA)</h3>
         <p>Chandrabhan Sharma College of Arts, Commerce and Science, Powai-Chandivali, Mumbai</p>
       </div>
-    </div>
-
-    <div class="txn">
-      <div class="date">2023</div>
-      <div class="desc">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-date">2023</div>
         <h3>Higher Secondary Education (HSC) — Commerce</h3>
         <p>Maharashtra State Board — 51%</p>
       </div>
-    </div>
-
-    <div class="txn">
-      <div class="date">2021</div>
-      <div class="desc">
+      <div class="t-item">
+        <div class="t-dot"></div>
+        <div class="t-date">2021</div>
         <h3>Secondary Education (SSC)</h3>
         <p>Maharashtra State Board — 54.40%</p>
       </div>
     </div>
   </section>
 
-  <section class="entry">
-    <p class="entry-no">Entry 05 — Project</p>
-    <h2>Academic Project</h2>
-
-    <div class="project-card">
+  <section>
+    <div class="section-head"><span class="section-num">05</span><h2>Project</h2></div>
+    <div class="project-card reveal">
+      <p class="project-meta">FINAL YEAR BCA PROJECT — TEAM OF TWO — 2026</p>
       <h3>Restaurant Website</h3>
-      <p class="project-meta">Final Year BCA Project — Team of Two — 2026</p>
-      <p style="color:var(--text-soft); font-size:0.94rem; margin:0;">
-        Built a full working restaurant website with a friend as a college
-        blackbook submission.
-      </p>
+      <p style="color:var(--muted); margin:0;">Built a full working restaurant website with a friend as a college blackbook submission.</p>
       <ul>
         <li>Table booking by date and time</li>
         <li>Home delivery request feature</li>
         <li>Customer profile and details section</li>
       </ul>
       <div class="stack">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>SQL</span>
+        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQL</span>
       </div>
     </div>
   </section>
 
-  <section class="entry" style="border-bottom:none;">
-    <p class="entry-no">Entry 06 — Languages</p>
-    <h2>Languages Known</h2>
-    <ul class="ledger-rows">
-      <li>Hindi <span class="tag">FLUENT</span></li>
-      <li>Marathi <span class="tag">FLUENT</span></li>
-      <li>English <span class="tag">WORKING</span></li>
-    </ul>
+  <section>
+    <div class="section-head"><span class="section-num">06</span><h2>Languages</h2></div>
+    <div class="lang-row reveal" id="langRow">
+      <div class="lang-bar-wrap">
+        <div class="lang-top"><span>Hindi</span><span>Fluent</span></div>
+        <div class="lang-track"><div class="lang-fill" data-fill="95"></div></div>
+      </div>
+      <div class="lang-bar-wrap">
+        <div class="lang-top"><span>Marathi</span><span>Fluent</span></div>
+        <div class="lang-track"><div class="lang-fill" data-fill="95"></div></div>
+      </div>
+      <div class="lang-bar-wrap">
+        <div class="lang-top"><span>English</span><span>Working</span></div>
+        <div class="lang-track"><div class="lang-fill" data-fill="70"></div></div>
+      </div>
+    </div>
   </section>
 
 </div>
 
-<footer>
-  Statement generated for Krithik Sundar Naik · References available on request
-</footer>
+<footer>References available on request · Built by Krithik Sundar Naik</footer>
+
+<script>
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progress.style.width = scrolled + '%';
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+
+        if (entry.target.id === 'timeline'){
+          document.getElementById('growthLine').style.height = '100%';
+        }
+        if (entry.target.id === 'langRow'){
+          entry.target.querySelectorAll('.lang-fill').forEach(bar => {
+            bar.style.width = bar.dataset.fill + '%';
+          });
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  revealEls.forEach(el => io.observe(el));
+</script>
 
 </body>
 </html>
