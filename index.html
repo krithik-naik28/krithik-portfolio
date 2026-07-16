@@ -19,7 +19,7 @@
     --card: #FFFFFF;
   }
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; }
   body{
     margin:0;
     background:var(--bg);
@@ -27,6 +27,8 @@
     font-family:'Inter',sans-serif;
     line-height:1.6;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
   }
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
@@ -38,7 +40,7 @@
     z-index:100; transition:width 0.1s linear;
   }
 
-  .wrap{ max-width:920px; margin:0 auto; padding:0 28px; }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 28px; width:100%; }
 
   .hero{
     padding:90px 0 60px;
@@ -60,16 +62,18 @@
   .eyebrow .dot{
     width:8px;height:8px;border-radius:50%;background:var(--accent);
     animation: pulse 2s ease-in-out infinite;
+    flex-shrink:0;
   }
   h1.name{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
-    font-size:clamp(2.6rem,8vw,4.4rem);
+    font-size:clamp(2rem,8vw,4.4rem);
     margin:0 0 12px;
-    line-height:1.02;
+    line-height:1.05;
     letter-spacing:-0.02em;
     opacity:0;
     animation: rise 0.8s ease 0.1s forwards;
+    word-break:break-word;
   }
   h1.name .accent-word{
     color:var(--primary);
@@ -89,7 +93,7 @@
     animation:sweep 0.9s ease 0.6s forwards;
   }
   .role{
-    font-size:1.15rem;
+    font-size:1.05rem;
     color:var(--muted);
     max-width:52ch;
     margin:0 0 34px;
@@ -103,7 +107,7 @@
   }
   .pill{
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.8rem;
+    font-size:0.78rem;
     border:1px solid var(--line);
     background:var(--card);
     padding:9px 16px;
@@ -111,6 +115,7 @@
     text-decoration:none;
     color:var(--ink);
     transition: all 0.25s ease;
+    white-space:nowrap;
   }
   .pill:hover{
     border-color:var(--primary);
@@ -130,32 +135,36 @@
 
   .stats{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3, minmax(0,1fr));
     gap:1px;
     background:var(--line);
     border:1px solid var(--line);
     border-radius:14px;
     overflow:hidden;
     margin-top:8px;
+    width:100%;
   }
   .stat{
     background:var(--card);
-    padding:22px 18px;
+    padding:18px 8px;
     text-align:center;
+    min-width:0;
   }
   .stat .num{
     font-family:'Space Grotesk',sans-serif;
     font-weight:700;
-    font-size:2rem;
+    font-size:clamp(1.3rem,5vw,2rem);
     color:var(--primary);
   }
   .stat .label{
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.68rem;
-    letter-spacing:0.06em;
+    font-size:0.62rem;
+    letter-spacing:0.04em;
     text-transform:uppercase;
     color:var(--muted);
     margin-top:4px;
+    line-height:1.3;
+    word-break:break-word;
   }
 
   section{ padding:70px 0; border-top:1px solid var(--line); }
@@ -185,7 +194,7 @@
   .reveal.in{ opacity:1; transform:translateY(0); }
 
   .about-text{
-    font-size:1.08rem;
+    font-size:1.05rem;
     color:var(--muted);
     max-width:68ch;
   }
@@ -196,7 +205,7 @@
     border:1px solid var(--line);
     padding:10px 18px;
     border-radius:999px;
-    font-size:0.92rem;
+    font-size:0.9rem;
     transition: all 0.25s ease;
     cursor:default;
   }
@@ -206,6 +215,16 @@
     border-color:var(--primary);
     transform:translateY(-3px);
   }
+
+  .lang-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.76rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--primary);
+    margin:0 0 12px;
+  }
+  .lang-group + .lang-group{ margin-top:26px; }
 
   .cert-grid{
     display:grid;
@@ -219,6 +238,7 @@
     border-radius:14px;
     padding:24px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-width:0;
   }
   .cert-card:hover{
     transform:translateY(-5px);
@@ -237,12 +257,12 @@
   .cert-card h3{
     font-family:'Space Grotesk',sans-serif;
     margin:0 0 6px;
-    font-size:1.08rem;
+    font-size:1.05rem;
   }
   .cert-card p{
     margin:0;
     color:var(--muted);
-    font-size:0.88rem;
+    font-size:0.86rem;
     font-family:'IBM Plex Mono',monospace;
   }
 
@@ -274,9 +294,9 @@
   .t-item h3{
     font-family:'Space Grotesk',sans-serif;
     margin:0 0 4px;
-    font-size:1.05rem;
+    font-size:1.02rem;
   }
-  .t-item p{ margin:0; color:var(--muted); font-size:0.92rem; }
+  .t-item p{ margin:0; color:var(--muted); font-size:0.9rem; }
 
   .project-card{
     background:var(--card);
@@ -294,12 +314,12 @@
   }
   .project-card h3{
     font-family:'Space Grotesk',sans-serif;
-    font-size:1.4rem;
+    font-size:1.3rem;
     margin:0 0 6px;
   }
   .project-meta{
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;
+    font-size:0.76rem;
     color:var(--primary);
     margin:0 0 16px;
   }
@@ -318,24 +338,22 @@
     border-radius:999px;
   }
 
-  .lang-row{ display:flex; gap:14px; flex-wrap:wrap; }
-  .lang-bar-wrap{
-    flex:1; min-width:180px;
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:12px;
-    padding:16px 18px;
-  }
-  .lang-top{ display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:8px; }
-  .lang-track{ height:6px; background:var(--line); border-radius:4px; overflow:hidden; }
-  .lang-fill{ height:100%; background:linear-gradient(90deg,var(--primary),var(--primary-light)); width:0%; border-radius:4px; transition:width 1.2s ease; }
-
   footer{
     text-align:center;
     padding:50px 0 40px;
     font-family:'IBM Plex Mono',monospace;
-    font-size:0.78rem;
+    font-size:0.76rem;
     color:var(--muted);
+    padding-left:20px;
+    padding-right:20px;
+  }
+
+  @media (max-width:480px){
+    .hero{ padding:60px 0 40px; }
+    .wrap{ padding:0 20px; }
+    section{ padding:50px 0; }
+    .section-head h2{ font-size:1.5rem; }
+    .stat{ padding:14px 4px; }
   }
 </style>
 </head>
@@ -350,7 +368,7 @@
     <h1 class="name">Krithik Sundar <span class="accent-word">Naik</span></h1>
     <p class="role">BCA Graduate building a career in banking — grounded in computer skills, data accuracy, and a fast-learning mindset.</p>
     <div class="contact-pills">
-      <a class="pill" href="tel:+919967845645">📞 +91 *******645</a>
+      <a class="pill" href="tel:+919967845645">📞 +91 9967845645</a>
       <a class="pill" href="mailto:krithiknaik2005@gmail.com">✉️ krithiknaik2005@gmail.com</a>
       <span class="pill">📍 Mumbai, India</span>
     </div>
@@ -365,7 +383,7 @@
         <div class="label">Certificates</div>
       </div>
       <div class="stat">
-        <div class="num">3</div>
+        <div class="num">4</div>
         <div class="label">Languages</div>
       </div>
     </div>
@@ -378,8 +396,7 @@
       banking sector. I have a good understanding of computers and databases,
       including SQL, which helps me work accurately with data and systems.
       I am a fast learner and can quickly pick up new skills or tasks.
-      I can communicate in Hindi, Marathi and English, and I am sincere,
-      disciplined, and eager to learn and grow within a bank.
+      I am sincere, disciplined, and eager to learn and grow within a bank.
     </p>
   </section>
 
@@ -426,13 +443,13 @@
         <div class="t-dot"></div>
         <div class="t-date">2023</div>
         <h3>Higher Secondary Education (HSC) — Commerce</h3>
-        <p>Maharashtra State Board </p>
+        <p>Maharashtra State Board — 51%</p>
       </div>
       <div class="t-item">
         <div class="t-dot"></div>
         <div class="t-date">2021</div>
         <h3>Secondary Education (SSC)</h3>
-        <p>Maharashtra State Board </p>
+        <p>Maharashtra State Board — 54.40%</p>
       </div>
     </div>
   </section>
@@ -453,23 +470,27 @@
       </div>
     </div>
   </section>
+
   <section>
     <div class="section-head"><span class="section-num">06</span><h2>Languages</h2></div>
-    <div class="reveal" id="langRow">
-      <p style="font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--primary); margin:0 0 10px;">WRITING</p>
-      <div class="chips" style="margin-bottom:26px;">
-        <span class="chip">English</span>
+    <div class="reveal">
+      <div class="lang-group">
+        <p class="lang-label">Writing</p>
+        <div class="chips">
+          <span class="chip">English</span>
+        </div>
       </div>
-      <p style="font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--primary); margin:0 0 10px;">SPEAKING</p>
-      <div class="chips">
-        <span class="chip">Hindi</span>
-        <span class="chip">Marathi</span>
-        <span class="chip">English</span>
-        <span class="chip">Tulu (Mangalorean Kannada)</span>
+      <div class="lang-group">
+        <p class="lang-label">Speaking</p>
+        <div class="chips">
+          <span class="chip">Hindi</span>
+          <span class="chip">Marathi</span>
+          <span class="chip">English</span>
+          <span class="chip">Tulu (Mangalorean Kannada)</span>
+        </div>
       </div>
     </div>
   </section>
-  
 
 </div>
 
@@ -488,14 +509,8 @@
     entries.forEach(entry => {
       if (entry.isIntersecting){
         entry.target.classList.add('in');
-
         if (entry.target.id === 'timeline'){
           document.getElementById('growthLine').style.height = '100%';
-        }
-        if (entry.target.id === 'langRow'){
-          entry.target.querySelectorAll('.lang-fill').forEach(bar => {
-            bar.style.width = bar.dataset.fill + '%';
-          });
         }
         io.unobserve(entry.target);
       }
